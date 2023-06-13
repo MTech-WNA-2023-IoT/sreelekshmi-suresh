@@ -1,7 +1,8 @@
 #Python Program to input data to mysql database
 #(c) Sai Shibu
 #Import pymysql module library
-import pymysql
+import PyMySQL
+
 #Create a connection to MySQL Database 
 conn =pymysql.connect(database="weatherdata",user="user",password="Pass",host="localhost")
 #Create a MySQL Cursor to that executes the SQLs
