@@ -2,15 +2,15 @@ import requests
 import mysql.connector
 
 # Weather API endpoint and API key
-api_url = "https://api.weatherapi.com/v1/current.json"
-api_key = "YOUR_API_KEY"
+api_url = "http://api.weatherapi.com/v1/current.json?key=809f318cf0b74cb5a6860658231306&q=London&aqi=no"
+api_key = "809f318cf0b74cb5a6860658231306"
 
 # MySQL database connection
 connection = mysql.connector.connect(
-    host="your_host",
-    user="your_username",
-    password="your_password",
-    database="your_database"
+    host="localhost",
+    user="user",
+    password="Pass",
+    database="weatherdata"
 )
 
 # Extract weather data from the API response
