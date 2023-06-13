@@ -1,6 +1,7 @@
 #Python Program to input data to mysql database
 #(c) Sai Shibu
 #Import pymysql module library
+
 import PyMySQL
 
 #Create a connection to MySQL Database 
