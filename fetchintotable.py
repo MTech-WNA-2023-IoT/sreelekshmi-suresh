@@ -2,8 +2,8 @@ import requests
 import pymysql.connector
 
 # Weather API endpoint and API key
-api_url = "http://api.weatherapi.com/v1/current.json?key=809f318cf0b74cb5a6860658231306&q=London&aqi=no"
-api_key = "809f318cf0b74cb5a6860658231306"
+api_url = "http://api.weatherapi.com/v1/current.json?key=46789d6a59a24422956181619231506&q=London&aqi=no"
+api_key = "46789d6a59a24422956181619231506"
 
 # MySQL database connection
 connection = pymysql.connector.connect(
