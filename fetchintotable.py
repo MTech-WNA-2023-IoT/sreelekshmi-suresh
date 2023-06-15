@@ -1,16 +1,16 @@
 import requests
-import mysql.connector
+import pymysql.connector
 
 # Weather API endpoint and API key
 api_url = "http://api.weatherapi.com/v1/current.json?key=809f318cf0b74cb5a6860658231306&q=London&aqi=no"
 api_key = "809f318cf0b74cb5a6860658231306"
 
 # MySQL database connection
-connection = mysql.connector.connect(
+connection = pymysql.connector.connect(
     host="localhost",
     user="user",
     password="Pass",
-    database="weatherdata"
+    database="Weatherdata"
 )
 
 # Extract weather data from the API response
@@ -35,7 +35,7 @@ response = requests.get(api_url, params=params).json()
 city, temperature, humidity, description, timestamp = extract_weather_data(response)
 
 # Create the SQL INSERT statement
-sql = "INSERT INTO weather_data (city, temperature, humidity, description, timestamp) VALUES (%s, %s, %s, %s, %s)"
+sql = "INSERT INTO data (city, temperature, humidity, description, timestamp) VALUES (%s, %s, %s, %s, %s)"
 
 # Execute the INSERT statement with the data
 cursor = connection.cursor()
