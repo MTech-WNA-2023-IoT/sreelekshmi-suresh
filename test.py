@@ -1,22 +1,44 @@
-#Python Program to input data to mysql database
-#(c) Sai Shibu
-#Import pymysql module library
+import json
+from urllib.request import urlopen
+import pymysql
 
-import PyMySQL
+# Create a connection to the MySQL database
+connection = pymysql.connect(
+    host='localhost',
+    user='user',
+    password='Pass',
+    database='Weatherdata'
+)
 
-#Create a connection to MySQL Database 
-conn =pymysql.connect(database="Weatherdata",user="user",password="Pass",host="localhost")
-#Create a MySQL Cursor to that executes the SQLs
-cur=conn.cursor()
-#Create a dictonary containing the fields, name, age and place
-data={'id':'1','location':kerala,'temperature':'20','humidity':'30'}
-#Execute the SQL to write data to the database
-cur.execute("INSERT INTO <atmosphere>(id, location, temperature,humidity)VALUES(%(id)s,%(location)s,%(temperature)s),%(humidity)s;",data)
-#Close the cursor
-cur.close()
-#Commit the data to the database
-conn.commit()
-#Close the connection to the database
-conn.close()
+# Obtain API key from https://www.weatherapi.com
+url = "http://api.weatherapi.com/v1/current.json?key=46789d6a59a24422956181619231506&q=London&aqi=no"
 
-#Open phpMyAdmin and see how the data is stored to the database
+api_page = urlopen(url)
+api = api_page.read()
+json_api = json.loads(api)
+
+print("Raw Data:")
+print(json_api)
+
+# Extract the desired data from the API response
+city = json_api['location']['name']
+temperature = json_api['current']['temp_c']
+humidity = json_api['current']['humidity']
+description = json_api['current']['condition']['text']
+timestamp = json_api['current']['last_updated']
+
+# Create the SQL INSERT statement
+sql = "INSERT INTO data (city, temperature, humidity, description, timestamp) VALUES (%s, %s, %s, %s, %s)"
+values = (city, temperature, humidity, description, timestamp)
+
+# Execute the SQL statement and commit the changes
+try:
+    cursor = connection.cursor()
+    cursor.execute(sql, values)
+    connection.commit()
+    print("Data inserted successfully.")
+except Exception as e:
+    print(f"Error inserting data: {str(e)}")
+
+# Close the database connection
+connection.close()
