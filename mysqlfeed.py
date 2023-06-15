@@ -5,7 +5,7 @@
 import PyMySQL
 
 #Create a connection to MySQL Database 
-conn =pymysql.connect(database="weatherdata",user="user",password="Pass",host="localhost")
+conn =pymysql.connect(database="Weatherdata",user="user",password="Pass",host="localhost")
 #Create a MySQL Cursor to that executes the SQLs
 cur=conn.cursor()
 #Create a dictonary containing the fields, name, age and place
